@@ -61,7 +61,7 @@ The following additional features are implemented in the bonus part:
 
 1. **Clone the Repository**:
    ```sh
-   git clone https://github.com/yourusername/minishell.git
+   git clone https://github.com/aabderrafie/minishell_42.git
    cd minishell
    ```
 

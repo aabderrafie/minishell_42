@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	ft_nonvalid(char *cmd, char *args, char *message)
+void ft_nonvalid(char *cmd, char *args, char *message)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(cmd, 2);
@@ -23,7 +23,7 @@ void	ft_nonvalid(char *cmd, char *args, char *message)
 	ft_putstr_fd("\n", 2);
 }
 
-void	ft_error(char *message, int exit_code, int f)
+void ft_error(char *message, int exit_code, int f)
 {
 	g_status = exit_code;
 	ft_putstr_fd("minishell: ", 2);
@@ -33,7 +33,7 @@ void	ft_error(char *message, int exit_code, int f)
 		exit(g_status);
 }
 
-void	my_perror(char *cmd, char *arg, int exit_code, int f)
+void my_perror(char *cmd, char *arg, int exit_code, int f)
 {
 	g_status = exit_code;
 	ft_putstr_fd("minishell: ", 2);
@@ -45,7 +45,7 @@ void	my_perror(char *cmd, char *arg, int exit_code, int f)
 		exit(g_status);
 }
 
-void	post_error(char *cmd, char *arg, int exit_code, int f)
+void post_error(char *cmd, char *arg, int exit_code, int f)
 {
 	g_status = exit_code;
 	ft_putstr_fd("minishell: ", 2);

@@ -12,13 +12,12 @@
 
 #include "../../minishell.h"
 
-void	exec_pwd(t_cmd *cmd, int f)
+void exec_pwd(t_cmd *cmd, int f)
 {
-	int		i;
-	char	*path;
+
+	char *path;
 
 	(void)cmd;
-	i = 0;
 	path = NULL;
 	path = getcwd(path, 0);
 	if (path == NULL)

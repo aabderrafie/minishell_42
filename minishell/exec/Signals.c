@@ -12,13 +12,13 @@
 
 #include "../minishell.h"
 
-void	herdoc_sig(int sig)
+void herdoc_sig(int sig)
 {
 	(void)sig;
 	exit(1);
 }
 
-void	handle_sigint(int sig)
+void handle_sigint(int sig)
 {
 	(void)sig;
 	printf("\n");
@@ -29,19 +29,19 @@ void	handle_sigint(int sig)
 	g_status = 1;
 }
 
-void	handle_eof(int sig)
+void handle_eof(int sig)
 {
 	(void)sig;
 	g_status = 1;
 	exit(g_status);
 }
 
-void	handle_sigquit(int sig)
+void handle_sigquit(int sig)
 {
 	(void)sig;
 }
 
-void	handle_signals(void)
+void handle_signals(void)
 {
 	signal(SIGINT, handle_sigint);
 	signal(SIGQUIT, handle_sigquit);

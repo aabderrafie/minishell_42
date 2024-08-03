@@ -12,7 +12,7 @@
 
 #include "../../minishell.h"
 
-int	check_isvalid(char *str)
+int check_isvalid(char *str)
 {
 	if (!str || !*str)
 		return (1);
@@ -27,11 +27,9 @@ int	check_isvalid(char *str)
 	return (0);
 }
 
-void	exec_exit(t_cmd *cmd, int f)
+void exec_exit(t_cmd *cmd, int f)
 {
-	int	i;
 
-	i = 1;
 	if (cmd->cmd[1] && !is_number(cmd->cmd[1]))
 	{
 		ft_putstr_fd("minishell: exit: ", 2);

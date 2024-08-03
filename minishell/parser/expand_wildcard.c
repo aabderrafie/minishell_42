@@ -12,9 +12,9 @@
 
 #include "../minishell.h"
 
-static int	handle_no_wildcard(t_pars **tmp, char **tmp_wild, t_pars *prev)
+static int handle_no_wildcard(t_pars **tmp, char **tmp_wild, t_pars *prev)
 {
-	int	i;
+	int i;
 
 	if (tmp_wild == NULL || (prev && prev->type == HEREDOC))
 	{
@@ -32,14 +32,12 @@ static int	handle_no_wildcard(t_pars **tmp, char **tmp_wild, t_pars *prev)
 	return (0);
 }
 
-static int	amb_red_wldc(t_pars **tmp, char **tmp_wild)
+static int amb_red_wldc(t_pars **tmp, char **tmp_wild)
 {
-	int	i;
+	int i;
 
 	i = 0;
-	if ((*tmp)->prev && ((*tmp)->prev->type == REDIRECT_OUT
-			|| (*tmp)->prev->type == REDIRECT_IN
-			|| (*tmp)->prev->type == APPEND_OUT))
+	if ((*tmp)->prev && ((*tmp)->prev->type == REDIRECT_OUT || (*tmp)->prev->type == REDIRECT_IN || (*tmp)->prev->type == APPEND_OUT))
 	{
 		while (tmp_wild[i])
 			i++;
@@ -59,10 +57,10 @@ static int	amb_red_wldc(t_pars **tmp, char **tmp_wild)
 	return (0);
 }
 
-static void	create_new_nodes(t_pars **tmp, char **tmp_wild, t_pars **new_node)
+static void create_new_nodes(t_pars **tmp, char **tmp_wild, t_pars **new_node)
 {
-	int	i;
-	int	j;
+	int i;
+	int j;
 
 	i = 0;
 	j = 0;
@@ -72,27 +70,27 @@ static void	create_new_nodes(t_pars **tmp, char **tmp_wild, t_pars **new_node)
 		if ((*tmp)->type == COMMAND && j == 0)
 		{
 			ft_lstadd_back_pars(new_node, ft_lstnew_pars(tmp_wild[i++],
-					(*tmp)->type, (*tmp)->space, 0));
+																									 (*tmp)->type, (*tmp)->space, 0));
 			j = 1;
 		}
 		else if (j == 1)
 		{
 			ft_lstadd_back_pars(new_node, ft_lstnew_pars(tmp_wild[i++],
-					ARGUMENT, (*tmp)->space, 0));
+																									 ARGUMENT, (*tmp)->space, 0));
 		}
 		else
 		{
 			ft_lstadd_back_pars(new_node, ft_lstnew_pars(tmp_wild[i++],
-					(*tmp)->type, (*tmp)->space, 0));
+																									 (*tmp)->type, (*tmp)->space, 0));
 		}
 	}
 }
 
-static void	process_wildcard(t_pars **x_parser, t_pars **tmp, char **tmp_wild,
-		t_pars *prev)
+static void process_wildcard(t_pars **x_parser, t_pars **tmp, char **tmp_wild,
+														 t_pars *prev)
 {
-	t_pars	*new_node;
-	t_pars	*last_new_node;
+	t_pars *new_node;
+	t_pars *last_new_node;
 
 	create_new_nodes(tmp, tmp_wild, &new_node);
 	new_node->prev = prev;
@@ -112,11 +110,12 @@ static void	process_wildcard(t_pars **x_parser, t_pars **tmp, char **tmp_wild,
 	*tmp = (*tmp)->next;
 }
 
-void	expand_wildcard(t_pars **x_parser, t_pars *tmp, char **files,
-		t_pars *next)
+void expand_wildcard(t_pars **x_parser, t_pars *tmp, char **files,
+										 t_pars *next)
 {
-	char	**tmp_wild;
-	t_pars	*prev;
+	(void)next;
+	char **tmp_wild;
+	t_pars *prev;
 
 	while (tmp)
 	{
@@ -126,11 +125,11 @@ void	expand_wildcard(t_pars **x_parser, t_pars *tmp, char **files,
 			next = tmp->next;
 			tmp_wild = is_wildcard(tmp->content, files, 0, 0);
 			if (handle_no_wildcard(&tmp, tmp_wild, prev))
-				continue ;
+				continue;
 			else
 			{
 				if (amb_red_wldc(&tmp, tmp_wild))
-					continue ;
+					continue;
 				process_wildcard(x_parser, &tmp, tmp_wild, prev);
 			}
 		}
